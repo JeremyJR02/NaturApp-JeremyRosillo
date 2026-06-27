@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "NaturApp",
+    "slug": "naturapp-firebase",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "scheme": "naturapp",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.naturapp.mobile"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#1A5276"
+      },
+      "package": "com.naturapp.mobile"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image-picker",
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#1A5276",
+          "resizeMode": "contain"
+        }
+      ],
+      "expo-font"
+    ]
+  }
+}
