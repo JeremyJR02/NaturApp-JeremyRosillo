@@ -238,11 +238,12 @@ export const CartService = {
 
   // Agregar al carrito
   addItem: async (userId, item) => {
+    const pId = item.productId || item.id;
     try {
       // Verificar si ya existe
       const q = query(
         collection(db, 'users', userId, 'cart'),
-        where('productId', '==', item.productId)
+        where('productId', '==', pId)
       );
       const snapshot = await getDocs(q);
 
@@ -256,7 +257,7 @@ export const CartService = {
       } else {
         // Agregar nuevo
         await addDoc(collection(db, 'users', userId, 'cart'), {
-          productId: item.productId,
+          productId: pId,
           name: item.name,
           price: item.price,
           image: item.image,
@@ -264,7 +265,7 @@ export const CartService = {
         });
       }
     } catch (err) {
-      const existing = localCart.items.find(i => i.productId === item.productId);
+      const existing = localCart.items.find(i => (i.productId || i.id) === pId);
       if (existing) {
         existing.quantity += item.quantity || 1;
       } else {
