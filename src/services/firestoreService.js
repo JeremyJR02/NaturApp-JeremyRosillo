@@ -227,7 +227,10 @@ export const CartService = {
     try {
       const q = query(collection(db, 'users', userId, 'cart'));
       const snapshot = await getDocs(q);
-      const items = snapshot.docs.map(d => ({ docId: d.id, ...d.data() }));
+      const items = snapshot.docs.map(d => {
+        const data = d.data();
+        return { id: data.productId || d.id, docId: d.id, ...data };
+      });
       const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
       return { items, total, count: items.length };
     } catch (err) {
